@@ -64,16 +64,16 @@ class App extends Component {
             });
     }
 
-    getSlow = () => {
-        const cache = setupCache({
-            maxAge: 15 * 60 * 1000
-        })
+    cache = setupCache({
+        maxAge: 15 * 60 * 1000
+    })
 
-        const api = Axios.create({
-            adapter: cache.adapter
-        })
-        
-        api({
+    api = Axios.create({
+        adapter: this.cache.adapter
+    })
+
+    getSlow = () => {
+        this.api({
             url: 'http://askat.me:8000/api/slow',
             method: 'get'
         }).then(async (response) => {
